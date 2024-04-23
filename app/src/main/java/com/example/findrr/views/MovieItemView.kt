@@ -18,6 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import com.example.findrr.R
 import com.example.findrr.data.Movie
 
 @Composable
@@ -30,6 +33,46 @@ fun MovieItem(movie: Movie) {
             .padding(vertical = 8.dp)
             .fillMaxWidth()
     ) {
-        
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier.size(120.dp)
+            ) {
+                Image(
+                    painter = rememberAsyncImagePainter(
+                        ImageRequest.Builder(LocalContext.current)
+                            .data(data = "https://image.tmdb.org/t/p/w500/${movie.posterPath}")
+                            .apply(block = fun ImageRequest.Builder.() {
+                                placeholder(R.drawable.ic_launcher_background)
+                                error(R.drawable.ic_launcher_background)
+                            }).build()
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            }
+
+            Column(
+                modifier = Modifier.padding(start = 8.dp)
+            ) {
+                Text(
+                    text = movie.title,
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                Text(
+                    text = "Release Date: ${movie.releaseDate}",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = "Rating: ${movie.voteAverage}/10",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        }
     }
 }
