@@ -88,6 +88,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     // Optional - Integration with LiveData
     implementation("androidx.compose.runtime:runtime-livedata")
-    // Optional - Integration with RxJava
-    implementation("androidx.compose.runtime:runtime-rxjava2")
+
+    implementation("com.google.code.gson:gson:2.8.7")
+
+    implementation ("com.squareup.retrofit2:retrofit:2.7.2")
+    implementation ("com.squareup.retrofit2:converter-gson:2.7.2")
+    implementation ("com.squareup.okhttp3:okhttp:3.6.0")
 }
